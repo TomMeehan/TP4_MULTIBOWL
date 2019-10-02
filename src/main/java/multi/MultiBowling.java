@@ -15,8 +15,8 @@ import bowling.*;
  */
 public class MultiBowling implements MultiPlayerGame {
     
-    Player[] players;
-    int currentPlayerIndex;
+    private Player[] players;
+    private int currentPlayerIndex;
     
     public MultiBowling(){
 
@@ -35,20 +35,30 @@ public class MultiBowling implements MultiPlayerGame {
 
     @Override
     public String lancer(int nombreDeQuillesAbattues) throws Exception {
+        
         Player currentPlayer = players[currentPlayerIndex%players.length];
+        
         currentPlayer.getGame().lancer(nombreDeQuillesAbattues);
-        if (currentPlayer.isFinished())
+        
+        if (currentPlayer.getGame().isFinished() || currentPlayer.getGame().hasCompletedFrame())
             currentPlayerIndex++;
         
         if(this.isFinished())
             return "Partie Terminée";
         else
-            return "Prochain tir : joueur " + players[currentPlayerIndex%3].toString();
+            return "Prochain tir : joueur " + players[currentPlayerIndex%players.length].toString();
     }
 
     @Override
     public int scoreFor(String playerName) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Player p = null;
+        for(int i = 0; i < this.players.length; i++){
+            if (this.players[i].getName() == playerName){
+                p = this.players[i];
+            }
+        }
+        
+        return p.getGame().score();
     }
 
     private boolean isFinished() {
@@ -58,6 +68,22 @@ public class MultiBowling implements MultiPlayerGame {
             }
         }
         return true;
+    }
+    
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
+
+    public void setCurrentPlayerIndex(int currentPlayerIndex) {
+        this.currentPlayerIndex = currentPlayerIndex;
     }
     
 }

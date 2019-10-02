@@ -13,7 +13,7 @@ import bowling.SinglePlayerGame;
  *
  * @author pedago
  */
-public class Player extends SinglePlayerGame {
+public class Player {
     
     private String name;
     private SinglePlayerGame game;
