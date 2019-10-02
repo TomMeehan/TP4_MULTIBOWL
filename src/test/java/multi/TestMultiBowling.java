@@ -132,6 +132,7 @@ public class TestMultiBowling {
         
         assertEquals("Partie Terminée",game.lancer(10));
     }
+
     
     //Utils
     private void rollStrike() throws Exception{

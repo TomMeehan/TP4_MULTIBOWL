@@ -26,18 +26,9 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public SinglePlayerGame getGame() {
         return game;
-    }
-
-    public void setGame(SinglePlayerGame game) {
-        this.game = game;
-    }
-    
+    } 
     
     @Override
     public String toString(){
