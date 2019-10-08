@@ -24,7 +24,7 @@ public class MultiBowling implements MultiPlayerGame {
 
     @Override
     public String startNewGame(String[] playerName) throws Exception {
-        if(playerName.length == 0) throw new Exception();
+        if(playerName == null || playerName.length == 0) throw new Exception("Aucun joueur dans la partie");
         this.players = new Player[playerName.length];
         for (int i = 0; i < playerName.length; i++){
             Player p = new Player(playerName[i],new SinglePlayerGame());
@@ -36,7 +36,7 @@ public class MultiBowling implements MultiPlayerGame {
 
     @Override
     public String lancer(int nombreDeQuillesAbattues) throws Exception {
-        if (this.players == null) throw new Exception();
+        if (this.players == null) throw new Exception("La partie n'a pas encore démarée");
         Player currentPlayer = players[currentPlayerIndex%players.length];
         
         currentPlayer.getGame().lancer(nombreDeQuillesAbattues);
@@ -58,7 +58,7 @@ public class MultiBowling implements MultiPlayerGame {
                 p = this.players[i];
             }
         }
-        
+        if(p == null) throw new Exception("Joueur introuvable");
         return p.getGame().score();
     }
 

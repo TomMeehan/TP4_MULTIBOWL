@@ -19,6 +19,8 @@ import static org.junit.Assert.*;
  */
 public class TestMultiBowling {
     
+    
+    
     MultiBowling game;
     String[] players = { "John", "Paul", "Georges", "Ringo" };
     
@@ -131,6 +133,25 @@ public class TestMultiBowling {
         rollMany(this.players.length*12 - 1 ,10);
         
         assertEquals("Partie Terminée",game.lancer(10));
+    }
+    
+    //Test tableau vide startNewGame
+    @Test(expected = Exception.class)  
+    public void startNewGameException() throws Exception {
+        game.startNewGame(null);
+    }
+    
+    //Test lancer sans startNewGame
+    @Test(expected = Exception.class) 
+    public void lancerWithoutStart() throws Exception {
+        game.lancer(10);
+    }
+    
+    //Test score joueur introuvable
+    @Test(expected = Exception.class)
+    public void scorePlayerUnknown() throws Exception {
+        game.startNewGame(this.players);
+        game.scoreFor("Tom");
     }
 
     
